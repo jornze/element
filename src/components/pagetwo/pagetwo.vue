@@ -1,0 +1,9 @@
+<template>
+<transition>
+	<div>
+		pagetwo
+	</div>
+</transition>
+</template>
+<script></script>
+<style></style>

@@ -1,0 +1,9 @@
+<template>
+<transition>
+	<div>
+		table
+	</div>
+</transition>
+</template>
+<script></script>
+<style></style>

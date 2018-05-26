@@ -1,0 +1,9 @@
+<template>
+<transition>
+	<div>
+		form
+	</div>
+</transition>
+</template>
+<script></script>
+<style></style>

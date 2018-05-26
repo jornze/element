@@ -1,0 +1,9 @@
+<template>
+<transition>
+	<div>
+		pagethr
+	</div>
+</transition>
+</template>
+<script></script>
+<style></style>
