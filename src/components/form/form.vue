@@ -1,9 +1,103 @@
 <template>
 <transition>
 	<div>
-		form
+		 <div style="padding:20px;" id="app">
+        <div class="panel panel-primary">
+            <div class="panel-heading">用户管理</div>
+            <table class="table table-bordered table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>年龄</th>
+                        <th>毕业学校</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template v-for="(row, index) in rows ">
+                        <tr v-if="index>=(curpage-1)*pagesize&&index<curpage*pagesize">
+                            <td>{{row.Name}}</td>
+                            <td>{{row.Age}}</td>
+                            <td>{{row.School}}</td>
+                            <td>{{row.Remark}}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination pagination-lg">
+                <li v-if="curpage==1" class="disabled"><a href="#">上一页</a></li>
+                <li v-else v-on:click="PrePage()" ><a href="#">上一页</a></li>
+                <template v-for="page in pageCount">
+                    <li v-if="page==curpage" class="active" v-on:click="NumPage(page, $event)"><a href="#">{{page}}</a></li>
+                    <li v-else v-on:click="NumPage(page, $event)"><a href="#">{{page}}</a></li>
+                </template>
+                <li v-if="curpage==pageCount" class="disabled"><a href="#">下一页</a></li>
+                <li v-else v-on:click="NextPage()" ><a href="#">下一页</a></li>
+            </ul>
+        </div>
 	</div>
 </transition>
 </template>
-<script></script>
-<style></style>
+<script>
+	export default{
+		data(){
+			return{
+				rows: [
+		            { Id: 1, Name: '小明', Age: 18, School: '光明小学', Remark: '三好学生' },
+		            { Id: 2, Name: '小刚', Age: 20, School: '复兴中学', Remark: '优秀班干部' },
+		            { Id: 3, Name: '吉姆格林', Age: 19, School: '光明小学', Remark: '吉姆做了汽车公司经理' },
+		            { Id: 4, Name: '李雷', Age: 25, School: '复兴中学', Remark: '不老实的家伙' },
+		            { Id: 5, Name: '韩梅梅', Age: 22, School: '光明小学', Remark: '在一起' },
+		            { Id: 1, Name: '小明', Age: 18, School: '光明小学', Remark: '三好学生' },
+		            { Id: 2, Name: '小刚', Age: 20, School: '复兴中学', Remark: '优秀班干部' },
+		            { Id: 3, Name: '吉姆格林', Age: 19, School: '光明小学', Remark: '吉姆做了汽车公司经理' },
+		            { Id: 4, Name: '李雷', Age: 25, School: '复兴中学', Remark: '不老实的家伙' },
+		            { Id: 5, Name: '韩梅梅', Age: 22, School: '光明小学', Remark: '在一起' },
+		            { Id: 1, Name: '小明', Age: 18, School: '光明小学', Remark: '三好学生' },
+		            { Id: 2, Name: '小刚', Age: 20, School: '复兴中学', Remark: '优秀班干部' },
+		            { Id: 3, Name: '吉姆格林', Age: 19, School: '光明小学', Remark: '吉姆做了汽车公司经理' },
+		            { Id: 4, Name: '李雷', Age: 25, School: '复兴中学', Remark: '不老实的家伙' },
+		            { Id: 5, Name: '韩梅梅', Age: 22, School: '光明小学', Remark: '在一起' },
+		            { Id: 1, Name: '小明', Age: 18, School: '光明小学', Remark: '三好学生' },
+		            { Id: 2, Name: '小刚', Age: 20, School: '复兴中学', Remark: '优秀班干部' },
+		            { Id: 3, Name: '吉姆格林', Age: 19, School: '光明小学', Remark: '吉姆做了汽车公司经理' },
+		            { Id: 4, Name: '李雷', Age: 25, School: '复兴中学', Remark: '不老实的家伙' },
+		            { Id: 5, Name: '韩梅梅', Age: 22, School: '光明小学', Remark: '在一起' },
+		        ],
+		        pagesize: 6,
+		        curpage:1
+			}
+		},
+		created:function(){
+            this.pageCount = Math.ceil(this.rows.length/this.pagesize);
+        },
+        methods: {
+            //上一页方法
+            PrePage: function (event) {
+                if (this.curpage>1) {
+                    this.curpage = this.curpage-1;
+                }
+            },
+            //下一页方法
+            NextPage: function (event) {
+                if (this.curpage < this.pageCount) {
+                    this.curpage = this.curpage+1;
+                }
+            },
+            //点击页码的方法
+            NumPage: function (num, event) {
+                if (this.curpage == num) {
+                    return;
+                }
+                this.curpage = num;
+            }
+        }
+	}
+</script>
+<style>
+.active{
+	background:#ccc;
+	border:1px solid blue;
+}
+</style>
