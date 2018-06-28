@@ -7,8 +7,8 @@
 				@keyup.enter='adddata'
 			  />
 	    </div>
-		<user2 :data='data' v-for='data in datas' :key='data.id' @del='delfun'></user2>
-		<user3 :filter='filter' @togglefilter='togg' :datas='datas'></user3>
+		<user2 :data='data' v-for='data in filterData' :key='data.id' @del='delfun'></user2>
+		<user3 :filter='filter' @togglefilter='togg' :datas='datas' @delcompleteddata='del'></user3>
 	</div>
 </transition>
 </template>
@@ -24,7 +24,15 @@ export default{
 			filter:'all'				
 		}
 	},
-
+	computed:{
+		filterData(){
+			if(this.filter=='all'){
+				return this.datas
+			}
+			let completed=this.filter=='completed'
+			return this.datas.filter(data=>data.completed==completed)
+		}
+	},
 	components:{
 		
 		User2,
@@ -48,6 +56,9 @@ export default{
 		},
 		togg(state){
 			this.filter=state
+		},
+		del(){
+			this.datas=this.datas.filter(data=>!data.completed)
 		}
 	}
 }

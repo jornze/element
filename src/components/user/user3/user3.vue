@@ -35,7 +35,7 @@ export default{
 			this.$emit('togglefilter',state)
 		},
 		del(){
-
+			this.$emit('delcompleteddata')
 		}
 	}
 }
